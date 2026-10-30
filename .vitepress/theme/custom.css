@@ -1,0 +1,38 @@
+/* AI Memory Handbook 自定义样式 */
+
+/* 首页 hero 署名：醒目、居中 */
+.VPHero .author-badge {
+  display: inline-block;
+  margin: 24px 0 4px;
+  padding: 10px 26px;
+  border-radius: 999px;
+  background: linear-gradient(120deg, rgba(94, 234, 212, 0.16), rgba(139, 124, 246, 0.16));
+  border: 1px solid rgba(94, 234, 212, 0.45);
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--vp-c-brand-1);
+}
+
+.VPHero .author-badge .author-name {
+  font-size: 1.5rem;
+  font-weight: 800;
+  background: linear-gradient(120deg, #14b8a6, #8b5cf6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* 右侧 logo 图适当放大，去掉默认阴影 */
+.VPHero .image-bg,
+.VPHero .image-src {
+  max-width: 240px !important;
+  max-height: 240px !important;
+  filter: drop-shadow(0 12px 32px rgba(94, 234, 212, 0.18));
+}
+
+/* 导航栏 logo 保持清晰 */
+.VPNavBarTitle .logo {
+  width: 28px;
+  height: 28px;
+}

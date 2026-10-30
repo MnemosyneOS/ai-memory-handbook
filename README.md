@@ -32,7 +32,7 @@
 
 ## 1. 白皮书架构与写作背景
 
-2025 年，我们发布了 Mnemosyne OS 的第一版，围绕「AI Agent 如何长期记住用户」这件事，从本地优先的存储引擎、零第三方依赖的部署形态、可审计的记忆账本到无损压缩，做了一次体系化的尝试。但随着记忆从 Agent 的附属功能变成一等原语，我们发现市场的关注度已经从「能不能记住」转向以下三大新挑战：
+2026 年 4 月，我们发布了 Mnemosyne OS 的第一版，围绕「AI Agent 如何长期记住用户」这件事，从本地优先的存储引擎、零第三方依赖的部署形态、可审计的记忆账本到无损压缩，做了一次体系化的尝试。但随着记忆从 Agent 的附属功能变成一等原语，我们发现市场的关注度已经从「能不能记住」转向以下三大新挑战：
 
 *   **工程化挑战**：从「能召回」到「可信召回」，记忆要能承担关键任务。
 
@@ -163,7 +163,6 @@
 | Mnemosyne OS 源码 | https://github.com/MnemosyneOS/mnemosyne |
 | Mnemosyne OS 可复现基准 | https://github.com/MnemosyneOS/mnemosyne-bench |
 | PyPI 发行包 | https://pypi.org/project/mnemosyne-os/ |
-| 官方文档站 | https://docs.mnemosyne-os.io |
 | 机器可读摘要（面向 AI 助手） | https://ai-memory.net/llms.txt |
 
 ## 7. 贡献者

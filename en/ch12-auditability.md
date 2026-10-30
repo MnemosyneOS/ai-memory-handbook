@@ -112,7 +112,7 @@ The ledger answers "who wrote it, and when", not "which sentence it was written 
 
 Memories are layered as they form. The raw conversation is L0; a single fact extracted from the conversation is L1; a session summary merging several L1 facts is L2; a topic summary merging several L2 entries under the same project is L3. `memory_trace` follows pointers from L3 to L2 to L1, returning the content at each layer, the turn range that layer covers, and the corresponding `message_ids`.
 
-A typical call looks like this: the L3 topic summary "this client's risk appetite shifted from steady to aggressive in Q3", covering turns 12–48; expand to the L2 session summary "the client explicitly accepts a 15% drawdown", covering turns 31–48; expand further to the L1 fact "at turn 37 on 08-14 the client stated a 15% drawdown was acceptable", with `message_ids` pointing at the specific messages. With all three layers traversed, "which sentence this conclusion came from" has an answer. Interface documentation is at `docs.mnemosyne-os.io`.
+A typical call looks like this: the L3 topic summary "this client's risk appetite shifted from steady to aggressive in Q3", covering turns 12–48; expand to the L2 session summary "the client explicitly accepts a 15% drawdown", covering turns 31–48; expand further to the L1 fact "at turn 37 on 08-14 the client stated a 15% drawdown was acceptable", with `message_ids` pointing at the specific messages. With all three layers traversed, "which sentence this conclusion came from" has an answer. Interface documentation is in the Mnemosyne OS source repository.
 
 ### 12.4.2 A Boundary Left Deliberately
 

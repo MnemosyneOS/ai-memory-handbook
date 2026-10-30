@@ -49,6 +49,12 @@ features:
     linkText: 阅读实践篇
 ---
 
+<div class="author-badge">作者：<span class="author-name">胡景堃</span>（Hu Jingkun）</div>
+
+<div style="text-align:center; margin-top: 10px; font-size: 0.95rem; color: var(--vp-c-text-2);">
+  发起并主导撰写 · 全书架构 / 章节体系 / 方法论框架 / 主要章节
+</div>
+
 ## 关于本书
 
 本书围绕 AI 记忆系统的架构、构建、运行、治理和调优的整个生命周期，总结了 Mnemosyne OS、企业客户与开源社区开发者在企业级 AI 记忆落地过程中的实践经验、教训与取舍。
@@ -82,7 +88,6 @@ features:
 - 官网：[ai-memory.net](https://ai-memory.net)
 - 源码：[github.com/MnemosyneOS/mnemosyne](https://github.com/MnemosyneOS/mnemosyne)
 - 可复现基准：[github.com/MnemosyneOS/mnemosyne-bench](https://github.com/MnemosyneOS/mnemosyne-bench)
-- 文档站：[docs.mnemosyne-os.io](https://docs.mnemosyne-os.io)
 
 ## 共建与授权
 

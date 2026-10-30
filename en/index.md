@@ -80,7 +80,6 @@ This book cites [Mnemosyne OS](https://ai-memory.net) extensively, not because i
 - Website: [ai-memory.net](https://ai-memory.net)
 - Source: [github.com/MnemosyneOS/mnemosyne](https://github.com/MnemosyneOS/mnemosyne)
 - Reproducible benchmark: [github.com/MnemosyneOS/mnemosyne-bench](https://github.com/MnemosyneOS/mnemosyne-bench)
-- Documentation: [docs.mnemosyne-os.io](https://docs.mnemosyne-os.io)
 
 ## Co-building and licensing
 

@@ -120,6 +120,7 @@ export default defineConfig({
   description:
     '企业级 AI 记忆系统的全生命周期实践：从上下文记忆到认知基础设施。Mnemosyne OS 出品。',
   srcExclude: ['README.md', 'README_EN.md', 'WEBSITE.md', 'node_modules/**', '*/README.md'],
+  base: '/ai-memory-handbook/',
   cleanUrls: true,
   lastUpdated: true,
   ignoreDeadLinks: true,

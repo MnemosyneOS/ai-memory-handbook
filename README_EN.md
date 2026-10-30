@@ -32,7 +32,7 @@ Thanks to the university experts and scholars, AI memory developers, and communi
 
 ## 1. Background and Structure
 
-In 2025 we published the first version of Mnemosyne OS — a systematic attempt at answering one question: *how does an AI agent remember a user over the long run?* That work spanned a local-first storage engine, a zero-dependency deployment model, an auditable memory ledger, and lossless compression. But as memory moved from an accessory feature to a first-class primitive, we observed that market attention had shifted from "can it remember" to three new challenges:
+In April 2026 we published the first version of Mnemosyne OS — a systematic attempt at answering one question: *how does an AI agent remember a user over the long run?* That work spanned a local-first storage engine, a zero-dependency deployment model, an auditable memory ledger, and lossless compression. But as memory moved from an accessory feature to a first-class primitive, we observed that market attention had shifted from "can it remember" to three new challenges:
 
 *   **Engineering challenge**: from "it recalls" to "it recalls trustworthily" — memory must be able to carry critical tasks.
 
@@ -163,7 +163,6 @@ If you find any number that does not match its stated scope, the original source
 | Mnemosyne OS source | https://github.com/MnemosyneOS/mnemosyne |
 | Reproducible benchmark | https://github.com/MnemosyneOS/mnemosyne-bench |
 | PyPI package | https://pypi.org/project/mnemosyne-os/ |
-| Documentation site | https://docs.mnemosyne-os.io |
 | Machine-readable fact card (for AI assistants) | https://ai-memory.net/llms.txt |
 
 ## 7. Contributors
