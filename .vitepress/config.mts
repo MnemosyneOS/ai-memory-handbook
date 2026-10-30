@@ -17,6 +17,39 @@ const PART_TITLES = {
 
 const PART_ORDER = Object.keys(PART_TITLES)
 
+const EN_TITLES = {
+  'reading-guide': 'Reading Guide',
+  '2026-technical-observations': '2026 Technical Observations',
+  'preface': 'Preface',
+  'ch01-why-memory-is-first-class': 'Ch. 1 — Why Memory Became a First-Class Primitive',
+  'ch02-reference-architecture': 'Ch. 2 — A Reference Architecture',
+  'ch03-form-and-maturity': 'Ch. 3 — Form and Maturity: L1–L4',
+  'ch04-writing': 'Ch. 4 — Writing',
+  'ch05-storage': 'Ch. 5 — Storage',
+  'ch06-retrieval': 'Ch. 6 — Retrieval',
+  'ch07-integration': 'Ch. 7 — Integration',
+  'ch08-deployment': 'Ch. 8 — Deployment',
+  'ch09-state-and-consistency': 'Ch. 9 — State Recovery and Consistency',
+  'ch10-scoping': 'Ch. 10 — Scoping',
+  'ch11-operating-at-scale': 'Ch. 11 — Operating at Scale',
+  'ch12-auditability': 'Ch. 12 — Auditability',
+  'ch13-deletion-and-forgetting': 'Ch. 13 — Deletion and Forgetting',
+  'ch14-pre-write-safety': 'Ch. 14 — Pre-Write Safety',
+  'ch15-compliance': 'Ch. 15 — Compliance',
+  'ch16-benchmarks': 'Ch. 16 — Benchmarks',
+  'ch17-benchmark-controversy': 'Ch. 17 — Benchmark Controversy',
+  'ch18-quality-and-badcase-loop': 'Ch. 18 — Quality and the Badcase Loop',
+  'ch19-controlled-self-evolution': 'Ch. 19 — Controlled Self-Evolution',
+  'ch20-system-comparison': 'Ch. 20 — Comparing the First Tier',
+  'ch21-selection-and-migration': 'Ch. 21 — Selection and Migration',
+  'ch22-scenarios': 'Ch. 22 — Scenarios in Practice',
+  'ch23-unsolved-problems': 'Ch. 23 — Unsolved Problems',
+  'appendix-a-glossary': 'Appendix A — Glossary',
+  'appendix-b-references': 'Appendix B — References'
+}
+
+const EN_ORDER = Object.keys(EN_TITLES)
+
 function chapterTitle(file) {
   const raw = readFileSync(file, 'utf8')
   const line = raw.split('\n').find((l) => l.startsWith('# '))
@@ -26,7 +59,6 @@ function chapterTitle(file) {
 function chapterOrder(name) {
   const m = name.match(/^(\d{2})-/)
   if (m) return Number(m[1])
-  if (name.startsWith('00-preface')) return 0
   if (name.startsWith('阅读导引')) return 1
   if (name.startsWith('2026')) return 2
   if (name.startsWith('附录A')) return 90
@@ -55,6 +87,30 @@ function buildSidebar() {
       }))
     })
   }
+
+  const enDir = join(ROOT, 'en')
+  try {
+    const enFiles = readdirSync(enDir).filter((f) => f.endsWith('.md') && f !== 'index.md')
+    enFiles.sort((a, b) => {
+      const ai = EN_ORDER.indexOf(a.replace(/\.md$/, ''))
+      const bi = EN_ORDER.indexOf(b.replace(/\.md$/, ''))
+      return (ai < 0 ? 99 : ai) - (bi < 0 ? 99 : bi)
+    })
+    sidebar.push({
+      text: 'English Edition',
+      collapsed: true,
+      items: [
+        { text: 'English home', link: '/en/' },
+        ...enFiles.map((f) => {
+          const key = f.replace(/\.md$/, '')
+          return { text: EN_TITLES[key] || key, link: `/en/${key}` }
+        })
+      ]
+    })
+  } catch {
+    /* no en directory */
+  }
+
   return sidebar
 }
 
@@ -63,7 +119,7 @@ export default defineConfig({
   title: 'AI Memory Handbook',
   description:
     '企业级 AI 记忆系统的全生命周期实践：从上下文记忆到认知基础设施。Mnemosyne OS 出品。',
-  srcExclude: ['README.md', 'README_EN.md', 'WEBSITE.md', 'node_modules/**'],
+  srcExclude: ['README.md', 'README_EN.md', 'WEBSITE.md', 'node_modules/**', '*/README.md'],
   cleanUrls: true,
   lastUpdated: true,
   ignoreDeadLinks: true,
@@ -71,6 +127,8 @@ export default defineConfig({
   head: [
     ['link', { rel: 'icon', href: '/favicon.svg' }],
     ['link', { rel: 'canonical', href: 'https://ai-memory.net/ai-memory-handbook/' }],
+    ['link', { rel: 'alternate', hreflang: 'zh-CN', href: 'https://ai-memory.net/ai-memory-handbook/' }],
+    ['link', { rel: 'alternate', hreflang: 'en', href: 'https://ai-memory.net/ai-memory-handbook/en/' }],
     ['meta', { name: 'author', content: 'Hu Jingkun (胡景堃)' }],
     ['meta', { name: 'copyright', content: 'Copyright © 2026 Hu Jingkun. CC BY-NC-ND 4.0.' }],
     [
@@ -78,7 +136,7 @@ export default defineConfig({
       {
         name: 'keywords',
         content:
-          'AI memory, agent memory, AI 记忆, 记忆系统, Mnemosyne OS, MCP, long-term memory, RAG, 上下文工程'
+          'AI memory, agent memory, AI 记忆, 记忆系统, Mnemosyne OS, MCP, long-term memory, RAG, 上下文工程, memory governance, hash-chained audit'
       }
     ],
     ['meta', { property: 'og:type', content: 'website' }],

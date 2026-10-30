@@ -1,0 +1,42 @@
+# Appendix A — Glossary
+
+This glossary covers only terms that carry a specific meaning in this book. General engineering vocabulary (such as "interface" or "deployment") is not included. For every English term that appears in the body text, the glossary gives the unified rendering used throughout.
+
+| Term | English | Definition | Confusable with |
+| --- | --- | --- | --- |
+| Single-pass ADD-only | single-pass ADD-only | Writing only appends new facts; one model call completes the write and never modifies or deletes existing facts | Not the same as an append-only log: the former still performs structured extraction and typing, the latter stores raw text |
+| Dual time axis | dual time axis | Separating "when the fact held" (`observation_date`) from "when the system learned it" (write time) | Not the same as a version chain: a version chain records multiple changes to one entity; the dual time axis records two temporal dimensions of one fact |
+| Scope | scope | The isolation dimension of memory; in this book specifically the four dimensions `user_id` / `agent_id` / `run_id` / `app_id` | Not the same as namespace: scope is the logical isolation dimension, namespace is the physical carrier |
+| Namespace | namespace | The independent storage unit derived from a scope, corresponding to an independent directory and database file | Do not mistake a "hard-coded namespace" for "isolated" |
+| Physical isolation | physical isolation | One independent file per scope, rather than a shared table with filter conditions | Contrasted with logical isolation, whose risk is a missing filter condition |
+| Hash-chained audit ledger | hash-chained audit ledger | Each record contains the SHA-256 hash of the previous record, forming a chain in which tampering can be located | Not the same as an operation log: a log can be deleted or altered without trace, a hash chain cannot |
+| Provenance tracing | provenance tracing | Following the pointer chain from a high-level conclusion back to the original message, answering "which sentence did this conclusion come from" | Not the same as log tracing, which answers "what happened and when" |
+| Pointer-chain backtracking | pointer-chain backtracking | Following the L3 → L2 → L1 pointers layer by layer to retrieve content and the covered message ids | The engine does not store L0 raw text; this is a deliberate privacy boundary |
+| Progressive disclosure | progressive disclosure | Returning a directory first (title, one-line summary, expansion cost) and expanding the body only on demand | Not the same as pagination: the former decides expansion by semantic relevance, the latter slices by position |
+| Budget-aware retrieval | budget-aware retrieval | Choosing which memories to return, and at what granularity, under a token budget constraint | Hard caps differ from soft caps: a hard cap discards by layer, a soft cap may truncate |
+| Lossless compression (AIC) | lossless compression (AIC) | Compressing memory into "pointer + structured facts + content atoms", with numbers, dates, amounts, and model numbers intact at every tier, restorable byte-for-byte | Not the same as summary compression, which is irreversible |
+| Content atom | content atom | A key fact fragment preserved intact after compression, such as a number, date, amount, model number, URL, or quoted phrase | Atoms are never trimmed at any compression tier |
+| Cascade delete | cascade delete | Deleting a memory while handling all four layers: source record, derived conclusions, retrieval cache, and dependent summaries | Not the same as single-record deletion, which handles only the first layer |
+| Mask | mask | Replacing the body with a placeholder while retaining the record skeleton; reversible and does not break the KV-Cache prefix | Not the same as deletion: the skeleton remains in storage and cannot substitute for deletion in compliance contexts |
+| Notary | notary | The pre-write safety pipeline: credential detection and field-level redaction, invisible Unicode detection, HTML injection detection | Not the same as retrieval-time filtering: the former ensures contaminated content never lands |
+| Sensitivity grading | sensitivity classification | Classifying content as normal / private / secret, which determines write admission and the recall gate | The recall gate is on by default and blocks only the secret level |
+| Conflict resolution | conflict resolution | Judging the type of a contradiction between old and new facts and choosing an action (ADD / NOOP / UPDATE / KEEP_BOTH) | Six kinds: temporal update, preference change, scope difference, precision difference, logical contradiction, source conflict |
+| Relevance floor | relevance floor | Candidates below this threshold do not enter the result set | Not the same as top-k truncation: the former may return fewer than k or even zero |
+| Lexical fallback | lexical fallback | When the embedding service is unavailable, BM25 and other lexical signals provide baseline recall | Guarantees degraded availability, but recall quality is below full fusion |
+| Sleep-time compute | sleep-time compute | An architectural idea in which a background process organizes and consolidates memory while the main flow is idle | This book makes no assertion about any system's current implementation |
+| Seven-factor session summary | seven-factor session summary | A fixed structure for session summaries: goal, constraints, decisions, open items, artefacts, failures, preferences, with verbatim anchors | Open items are stored independently rather than mixed into the summary |
+| Preconditions | preconditions | The mandatory `must` / `must_not` / `typical_env` recorded when saving a reusable experience | An experience missing preconditions causes negative transfer when conditions do not match |
+| Negative transfer | negative transfer | An experience valid in one scenario applied indiscriminately to an inapplicable one, causing an incident | The mitigation is precondition validation at recall time |
+| Golden dataset | golden dataset | A high-quality evaluation asset containing inputs, trajectories, results, and criteria | Not the same as a test set: a golden dataset includes trajectories and criteria, not only question-answer pairs |
+| Trajectory | trajectory | The complete execution record of a task from goal to result, including tool calls and intermediate decisions | Not the same as a trace: a trace is an observation record, a trajectory is reusable behavioural evidence |
+| Human-in-the-loop | Human-in-the-loop, HITL | The architectural principle that critical steps must be confirmed by a human before continuing | Not the same as an approval switch: the former is an architectural principle, the latter a feature |
+| Retrieval-Augmented Generation | Retrieval-Augmented Generation, RAG | Retrieving external knowledge and injecting it into context to generate an answer | Not the same as memory retrieval: the former's authority comes from its source, the latter's from its process |
+| Controlled self-evolution | controlled self-evolution | Turning effective experience into memory, experience entries, tools, and runtime mechanisms, and making them effective only after evaluation and gating | Not the same as self-modification: the former must pass reproducible evaluation and a rollback-capable release |
+| Maturity levels | L1–L4 | Four levels graded on two axes: the responsibility memory carries and how verifiable it is | Autonomy is an independent parameter orthogonal to the grading, not a grading criterion |
+| Tier gate | tier gate | The mechanism by which the hosted edition narrows read windows according to subscription tier | Off by default; self-hosted and PyPI users are unrestricted |
+
+## A.1 Two notes on terminology
+
+**First, "memory" and "context" are not synonyms in this book.** Context is the input to the current inference, with a lifetime bounded by one call; memory is state persisted across calls, with a lifetime bounded by the user or task. Conflating them leads to inferences such as "a bigger context window removes the need for memory".
+
+**Second, "deletion" in this book always refers to one of the four semantics, and which one is determined by context.** Where ambiguity is possible, this book states the layer explicitly (mark-delete, mask, cascade soft-delete, physical delete). Readers are advised to use the same precision when talking to vendors, because the sentence "we support deletion" carries almost no information in a compliance context.
